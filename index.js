@@ -11,6 +11,15 @@ app.get('/', (req, res)=>{
     res.sendFile('/index.html')
 })
 
+app.use(passport.session({
+    secret: 'mister',
+    resave: false,
+    saveUnintialized: true,
+    cookie: {secure: false}
+}))
+
+app.use(passport.initialize())
+
 app.get('/auth/google',
   passport.authenticate('google', { scope:
       [ 'email', 'profile' ] }
